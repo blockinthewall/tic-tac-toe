@@ -17,10 +17,9 @@ html,body {
     grid-template-columns: 200px 200px 200px;
     align-items: center;
     justify-content: center;
-    column-gap: 0px;
     
-   
 }
+
 
 h1 {
     font-size: 1.5rem;
@@ -34,7 +33,7 @@ h1 {
     width: 200px;
     font-size: 10rem;
     text-align: center;
-    align-self: center;
+
 }
 
 .player1Selection {
@@ -65,4 +64,37 @@ h1 {
 #confirm {
     visibility: hidden;
     font-size: 20px;
+}
+
+@media (max-width: 768px) {
+    #grid {
+        grid-template-columns: repeat(3, 120px)
+    }
+
+    .cell {
+        height: 120px;
+        width: 120px;
+        font-size: 100px;
+    }
+
+    .player1Selection {
+        border: 2px solid white;
+        background: white;
+        color: #56d0ae;
+        height: 120px;
+        width: 120px;
+        font-size: 100px;
+        text-align: center;
+    }
+    
+    .player2Selection {
+        border: 2px solid yellow;
+        background: yellow;
+        color: #56d0ae;
+        height: 120px;
+        width: 120px;
+        font-size: 100px;
+        text-align: center;
+    }
+
 }
