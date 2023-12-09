@@ -1,12 +1,9 @@
 * {
-    font-family: 'Press Start 2P', cursive;
-    background-color: #09051e;
-    color: #56d0ae;
+    font-family: 'Bad Script', cursive;
+    color: grey;
 }
 
 html,body {
-    margin: 0%;
-    padding: 0%;
     width: 100%;
     height: auto;
     overflow-x: hidden;
@@ -20,40 +17,52 @@ html,body {
     
 }
 
+#result {
+    visibility: hidden;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background: rgb(0, 255, 149);;
+    font-size: 7rem;
+}
 
 h1 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     text-align:center;
 }
 
 
 .cell {
-    border: 2px solid white;
+    border: 2px solid grey;
     height: 200px;
     width: 200px;
-    font-size: 10rem;
+    font-size:7rem;
     text-align: center;
 
 }
 
 .player1Selection {
-    border: 2px solid white;
+    border: 2px solid;
     background: white;
     color: #56d0ae;
     height: 200px;
     width: 200px;
-    font-size: 10rem;
+    font-size: 7rem;
     text-align: center;
 }
 
 .player2Selection {
-    border: 2px solid yellow;
-    background: yellow;
-    color: #56d0ae;
+    border: 2px solid;
+    color: #bb65f0;
     height: 200px;
     width: 200px;
-    font-size: 10rem;
+    font-size: 7rem;
     text-align: center;
+    align-self: center;
 }
 
 #section-2 {
@@ -66,6 +75,13 @@ h1 {
     font-size: 20px;
 }
 
+#reset {
+    visibility: hidden;
+    font-size: 20px;
+}
+
+/* mobile view */
+
 @media (max-width: 768px) {
     #grid {
         grid-template-columns: repeat(3, 120px)
@@ -74,27 +90,28 @@ h1 {
     .cell {
         height: 120px;
         width: 120px;
-        font-size: 100px;
+        font-size: 50px;
     }
 
     .player1Selection {
-        border: 2px solid white;
-        background: white;
-        color: #56d0ae;
         height: 120px;
         width: 120px;
-        font-size: 100px;
+        font-size: 50px;
         text-align: center;
     }
     
     .player2Selection {
-        border: 2px solid yellow;
-        background: yellow;
-        color: #56d0ae;
         height: 120px;
         width: 120px;
-        font-size: 100px;
+        font-size: 50px;
         text-align: center;
     }
 
+    #result {
+        font-size: 3rem;
+    }
+
 }
+
+
+

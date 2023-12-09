@@ -1,69 +1,85 @@
 let currentPlayer = "X";
 let confirm = document.getElementById("confirm");
+let reset = document.getElementById("reset");
 let boxes = document.getElementsByClassName("cell");
-let boxArray = console.log(Array.from(boxes));
-let gridArray;
+let boxesArray = Array.from(boxes);
+let resultMsg = document.getElementById("result");
+let selectedBoxIndex;
+let status;
+let gridArray = [
+["", "", ""],
+["", "", ""],
+["", "", ""]
+];
+
+let winCombos = [
+    [0,1,2], [3,4,5], [6,7,8], //row matches
+    [0,3,6], [1,4,7], [2,5,8], //column matches
+    [0,4,8], [2,4,6] //diagonal matches
+];
 
 
 for (box of boxes) {
-    box.addEventListener("click", player1Turn);
+    box.addEventListener("click", playerTurn); //click to commence playerTurn
 }
 
-function player1Turn(e) { 
+function playerTurn(e) { 
     for (box of boxes) {
         box.innerHTML = "";
-    }
-    e.target.innerHTML = currentPlayer;
+        e.target.innerHTML = currentPlayer;
+        selectedBoxIndex = boxesArray.indexOf(e.target);
     confirm.style.visibility = "visible";
-    confirm.addEventListener("click", nextTurn);
+    confirm.addEventListener("click", nextTurn); //next Turn commences when current players clicks confirm
+}
 }
 
 function nextTurn() {
-    for (box of boxes) {
+   let rowIndex = Math.floor(selectedBoxIndex / 3);
+   let colIndex = selectedBoxIndex % 3;
+   gridArray[rowIndex][colIndex] = currentPlayer; //replaces the selected index of the 2D array with the symbol of the player
+   for (box of boxes) {
         if (box.innerHTML === "X") {
-            box.classList.add("player1Selection");
-            box.classList.remove("cell");
-} else if (box.innerHTML === "O") {
+           box.classList.add("player1Selection");
+            box.classList.remove("cell");  // class is removed so that the previous box is not clickable anymore
+            box.removeEventListener("click", playerTurn);
+            
+        } else if (box.innerHTML === "O") {
             box.classList.add("player2Selection");
             box.classList.remove("cell");
-}
-}
-currentPlayer = currentPlayer === "X" ? "O" : "X";;
-}
-
-
-/* function checkMatches() {
-let rows = grid.length;
-let cols = grid[0].length;
-
-for (let row=0; row < rows; row++) {
-    for (let col=0; col < cols - 2; col++) {
-        if (
-            grid[row][col] === grid[row][col + 1] &&
-            grid[row][col] === grid[row][col + 2]
-        ) {
-            console.log("Match in row $(row)");
-        }
+            box.removeEventListener("click", playerTurn);
+        } 
     }
+        currentPlayer = currentPlayer === "X" ? "O" : "X"; // the symbol of the current player based on the previous player
+        checkMatches()
 }
-} */
 
-function transformArray() {
-let numberOfRows = 3;
-let numberOfColumns = 3;
-let gridArray = [];
-let index = 0;
 
-for (let i=0; i < numberofRows; i++) {
-    gridArray[i]= [];
-    for (let j=0; j < numberOfColumns; j++) {
-        gridArray[i][j] = boxArray[index];
-        index++;
+
+function checkMatches() {
+    let winner = null;
+  
+ winCombos.forEach((combo) => {
+    let [a,b,c] = combo
+    let valueA = gridArray[Math.floor(a/3)][a%3];
+    let valueB = gridArray[Math.floor(b/3)][b%3];
+    let valueC = gridArray[Math.floor(c/3)][c%3];
+
+    if (valueA && valueA === valueB && valueA === valueC) {
+        winner = valueA;
     }
-console.log(gridArray[i]);
+ });
+
+ if (winner) {
+    resultMsg.style.visibility = "visible";
+    resultMsg.innerHTML = `${winner} wins!`;
+    confirm.style.visibility = "hidden";
+    reset.style.visibility = "visible";
+ } 
+
+reset.addEventListener("click", restart)
+} 
+
+function restart() {
+    location.reload();
 }
-}
-
-
-
 
